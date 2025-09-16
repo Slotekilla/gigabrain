@@ -2,33 +2,28 @@ import React, { useState, useEffect } from 'react';
 import { Play, Users, DollarSign, MessageCircle, ExternalLink } from 'lucide-react';
 
 function App() {
-  const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
+  const [timeLeft, setTimeLeft] = useState({ hours: 17, minutes: 40, seconds: 0 });
 
   const [marketCap, setMarketCap] = useState('N/A');
   const [holders, setHolders] = useState('LOADING...');
 
   // Countdown timer
   useEffect(() => {
-    const targetDate = new Date('2024-09-17T14:00:00+01:00');
-    
-    const updateCountdown = () => {
-      const now = new Date();
-      const difference = targetDate.getTime() - now.getTime();
-      
-      if (difference > 0) {
-        const hours = Math.floor(difference / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-        
-        setTimeLeft({ hours, minutes, seconds });
-      } else {
-        setTimeLeft({ hours: 0, minutes: 0, seconds: 0 });
-      }
-    };
-    
-    updateCountdown(); // Initial call
     const timer = setInterval(() => {
-      updateCountdown();
+      setTimeLeft(prevTime => {
+        const totalSeconds = prevTime.hours * 3600 + prevTime.minutes * 60 + prevTime.seconds;
+        
+        if (totalSeconds <= 0) {
+          return { hours: 0, minutes: 0, seconds: 0 };
+        }
+        
+        const newTotalSeconds = totalSeconds - 1;
+        const hours = Math.floor(newTotalSeconds / 3600);
+        const minutes = Math.floor((newTotalSeconds % 3600) / 60);
+        const seconds = newTotalSeconds % 60;
+        
+        return { hours, minutes, seconds };
+      });
     }, 1000);
 
     return () => clearInterval(timer);
