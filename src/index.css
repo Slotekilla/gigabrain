@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-200%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 15s linear infinite;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* Custom pulse animation for more chaos */
+@keyframes chaos-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  25% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(0.95);
+  }
+  75% {
+    opacity: 1.1;
+    transform: scale(1.02);
+  }
+}
+
+.animate-chaos {
+  animation: chaos-pulse 3s ease-in-out infinite;
+}
+
+/* Glowing text effect */
+.glow-text {
+  text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ec4899, #8b5cf6);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #f472b6, #a855f7);
+}
+
+/* Prevent horizontal scroll */
+body {
+  overflow-x: hidden;
+}
+
+/* Make buttons even more chaotic on mobile */
+@media (max-width: 768px) {
+  .animate-bounce {
+    animation-duration: 1s;
+  }
+  
+  .animate-pulse {
+    animation-duration: 1.5s;
+  }
+}
