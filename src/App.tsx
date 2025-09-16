@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Play, Users, DollarSign, MessageCircle, ExternalLink } from 'lucide-react';
+import { Play, Users, DollarSign, MessageCircle, ExternalLink, Twitter } from 'lucide-react';
 
 function App() {
   const [timeLeft, setTimeLeft] = useState({ hours: 17, minutes: 40, seconds: 0 });
@@ -202,6 +202,16 @@ function App() {
             >
               <MessageCircle size={24} />
               Discord
+              <ExternalLink size={20} />
+            </a>
+            <a 
+              href="https://x.com/GIGABRAIN_coin" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-3 bg-gradient-to-r from-blue-600 to-cyan-800 text-white font-bold text-xl px-8 py-4 rounded-2xl hover:scale-105 transition-transform border-2 border-pink-400"
+            >
+              <Twitter size={24} />
+              X (Twitter)
               <ExternalLink size={20} />
             </a>
           </div>
