@@ -2,7 +2,30 @@ import React, { useState, useEffect } from 'react';
 import { Play, Users, DollarSign, MessageCircle, ExternalLink, Twitter } from 'lucide-react';
 
 function App() {
-  const [timeLeft, setTimeLeft] = useState({ hours: 17, minutes: 40, seconds: 0 });
+  // Calculate initial time based on when the countdown started
+  const getInitialTime = () => {
+    const startTime = localStorage.getItem('countdownStartTime');
+    const now = Date.now();
+    
+    if (!startTime) {
+      // First time - set start time and return full duration
+      localStorage.setItem('countdownStartTime', now.toString());
+      return { hours: 17, minutes: 0, seconds: 0 };
+    }
+    
+    // Calculate elapsed time since start
+    const elapsed = Math.floor((now - parseInt(startTime)) / 1000);
+    const totalSeconds = 17 * 3600; // 17 hours in seconds
+    const remaining = Math.max(0, totalSeconds - elapsed);
+    
+    const hours = Math.floor(remaining / 3600);
+    const minutes = Math.floor((remaining % 3600) / 60);
+    const seconds = remaining % 60;
+    
+    return { hours, minutes, seconds };
+  };
+
+  const [timeLeft, setTimeLeft] = useState(getInitialTime);
 
   const [marketCap, setMarketCap] = useState('N/A');
   const [holders, setHolders] = useState('LOADING...');
